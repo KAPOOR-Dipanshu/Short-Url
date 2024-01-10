@@ -3,6 +3,7 @@ require('dotenv').config();
 
 // Import necessary modules and files
 const express = require('express');
+const cors = require('cors');
 const urlRoute = require('./routes/url'); // Import routes for handling URL-related operations
 const staticRoute = require('./routes/staticRouter'); // Import routes for serving static content
 const URL = require('./models/url'); // Import the URL model
@@ -12,9 +13,10 @@ const path = require('path'); // Utilized for handling file paths
 
 // Create an instance of the Express application
 const app = express();
+app.use(cors());
 
 // Set the port number for the server
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8001;
 
 // Connect to MongoDB using the specified URL
 connectToMongoDB(MONGO_URL);
