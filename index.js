@@ -4,8 +4,11 @@ require('dotenv').config();
 // Import necessary modules and files
 const express = require('express');
 const cors = require('cors');
+
 const urlRoute = require('./routes/url'); // Import routes for handling URL-related operations
 const staticRoute = require('./routes/staticRouter'); // Import routes for serving static content
+const userRoute = require('./routes/user')
+
 const URL = require('./models/url'); // Import the URL model
 const { connectToMongoDB } = require('./connection'); // Import the function to connect to MongoDB
 const MONGO_URL = process.env.MONGO_URL; // Retrieve MongoDB connection URL from environment variables
@@ -35,6 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 
 // Set up routes for serving static content (e.g., HTML, CSS, images)
 app.use("/", staticRoute); // Serve static content from the 'staticRoute' path
+app.use("/user", userRoute); // Serve static content from the 'userRoute' path
 app.use("/url", urlRoute); // Handle URL-related operations from the 'urlRoute' path
 
 // Route for handling redirects based on a short URL parameter
