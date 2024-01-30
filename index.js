@@ -11,7 +11,7 @@ const staticRoute = require('./routes/staticRouter'); // Import routes for servi
 const userRoute = require('./routes/user')
 
 const URL = require('./models/url'); // Import the URL model
-const {restrictToLoggedInUser} = require('./middlewares/auth')
+const {restrictToLoggedInUser, checkAuth} = require('./middlewares/auth')
 const { connectToMongoDB } = require('./connection'); // Import the function to connect to MongoDB
 const MONGO_URL = process.env.MONGO_URL; // Retrieve MongoDB connection URL from environment variables
 const path = require('path'); // Utilized for handling file paths
@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Set up routes for serving static content (e.g., HTML, CSS, images)
-app.use("/", staticRoute); // Serve static content from the 'staticRoute' path
+app.use("/", checkAuth , staticRoute); // Serve static content from the 'staticRoute' path
 app.use("/user", userRoute); // Serve static content from the 'userRoute' path
 app.use("/url", restrictToLoggedInUser , urlRoute); // Handle URL-related operations from the 'urlRoute' path
 

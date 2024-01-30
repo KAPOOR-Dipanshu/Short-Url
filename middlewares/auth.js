@@ -6,13 +6,27 @@ async function restrictToLoggedInUser(req, res, next) {
         return res.redirect('/login')
     }
 
-    const user = await getUser(userid);
-    if(!user) return res.redirect('/login')
+    const user = getUser(userid);
+    console.log(user)
+    
+    if(!user) {
+        return res.redirect('/login')
+    }
 
-    req.user = user
+    req.user = user;
+    next();
+}
+
+async function checkAuth(req, res, next){
+    const userid = req.cookies?.uuid;
+
+    const user = getUser(userid);
+
+    req.user = user;
     next();
 }
 
 module.exports = {
     restrictToLoggedInUser,
+    checkAuth,
 }
