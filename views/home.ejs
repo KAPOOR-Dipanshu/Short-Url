@@ -4,22 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <style>
+      th,
+      td {
+        border: 2px solid red;
+        text-align: center;
+      }
+      .redirect-url {
+        white-space: break-spaces;
+      }
+
+      @media only screen and (max-width: 600px) {
+        table {
+          width: 100%;
+          height: 400px;
+          border-collapse: collapse;
+        }
+        th,
+        td {
+          width: 25%;
+        }
+      }
+    </style>
   </head>
   <body>
     <h1>URL~SHORTNER</h1>
     <% if (locals.id) { %>
-    <p> <%= base %><%= id %></p>
+    <p><%= base %><%= id %></p>
     <% } %>
-    <br>
+    <br />
     <div>
       <form action="/url" method="POST">
-        <label>Enter Your Orignal URL</label>
+        <label>Enter Your Original URL</label>
         <input type="text" placeholder="https://example.com" name="url" />
         <button type="submit">Generate</button>
       </form>
     </div>
-    <br>
-    <br>
+    <br />
+    <br />
     <div>
       <% if (locals.urls) { %>
       <table>
@@ -31,12 +53,12 @@
         </thead>
         <tbody>
           <% urls.forEach((url , index) => { %>
-            <tr>
-              <td><%= index + 1 %></td>
-              <td><%= url.shortId %></td>
-              <td><%= url.redirectUrl %></td>
-              <td><%= url.visitHistory.length %></td>
-            </tr>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= url.shortId %></td>
+            <td class="redirect-url"><%= url.redirectUrl %></td>
+            <td><%= url.visitHistory.length %></td>
+          </tr>
           <% }) %>
         </tbody>
       </table>
