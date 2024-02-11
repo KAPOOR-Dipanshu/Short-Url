@@ -1,100 +1,277 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
   <head>
-    <title>Signup</title>
+    <meta charset="UTF-8" />
+
+    <title>SIGNUP</title>
+
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Quicksand", sans-serif;
+      }
       body {
-        font-family: Arial, sans-serif;
-        background-color: #7ae6f5;
         display: flex;
         justify-content: center;
         align-items: center;
+        min-height: 100vh;
+        background: #000;
+      }
+      section {
+        position: absolute;
+        width: 100vw;
         height: 100vh;
-        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+        flex-wrap: wrap;
+        overflow: hidden;
+      }
+      section::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(#000, #0f0, #000);
+        animation: animate 5s linear infinite;
+      }
+      @keyframes animate {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(100%);
+        }
+      }
+      section span {
+        position: relative;
+        display: block;
+        width: calc(6.25vw - 2px);
+        height: calc(6.25vw - 2px);
+        background: #181818;
+        z-index: 2;
+        transition: 1.5s;
+      }
+      section span:hover {
+        background: #0f0;
+        transition: 0s;
       }
 
-      .container {
-        width: auto;
-        height: auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 80px rgba(0, 0, 0, 0.269);
+      section .signin {
+        position: absolute;
+        width: 400px;
+        background: #222;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 9);
       }
-
-      .form-signin {
-        text-align: center;
+      section .signin .content {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 40px;
       }
-
-      .form-signin-heading {
-        margin-bottom: 20px;
-        color: #333;
+      section .signin .content h2 {
+        font-size: 2em;
+        color: #0f0;
+        text-transform: uppercase;
       }
-
-      .form-control {
-        margin-bottom: 15px;
+      section .signin .content .form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
       }
-
-      .btn-primary {
-        background-color: #007bff;
+      section .signin .content .form .inputBox {
+        position: relative;
+        width: 100%;
+      }
+      section .signin .content .form .inputBox input {
+        position: relative;
+        width: 100%;
+        background: #333;
         border: none;
+        outline: none;
+        padding: 25px 10px 7.5px;
+        border-radius: 4px;
         color: #fff;
+        font-weight: 500;
+        font-size: 1em;
+      }
+      section .signin .content .form .inputBox i {
+        position: absolute;
+        left: 0;
+        padding: 15px 10px;
+        font-style: normal;
+        color: #aaa;
+        transition: 0.5s;
+        pointer-events: none;
+      }
+      .signin .content .form .inputBox input:focus ~ i,
+      .signin .content .form .inputBox input:valid ~ i {
+        transform: translateY(-7.5px);
+        font-size: 0.8em;
+        color: #fff;
+      }
+      .signin .content .form .links {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      }
+      .signin .content .form .links p {
+        color: #0f0;
+        text-decoration: none;
+      }
+      .signin .content .form .links a:nth-child(2) {
+        color: #0f0;
+        font-weight: 600;
+      }
+      .signin .content .form .inputBox input[type="submit"] {
         padding: 10px;
-        border-radius: 5px;
+        background: #0f0;
+        color: #000;
+        font-weight: 600;
+        font-size: 1.35em;
+        letter-spacing: 0.05em;
         cursor: pointer;
       }
-
-      .btn-primary:hover {
-        background-color: #0056b3;
+      input[type="submit"]:active {
+        opacity: 0.6;
       }
-
-      a {
-        text-decoration: none;
-        color: #007bff;
+      @media (max-width: 900px) {
+        section span {
+          width: calc(10vw - 2px);
+          height: calc(10vw - 2px);
+        }
       }
-
-      a:hover {
-        text-decoration: underline;
+      @media (max-width: 600px) {
+        section span {
+          width: calc(20vw - 2px);
+          height: calc(20vw - 2px);
+        }
       }
     </style>
   </head>
+
   <body>
-    <div class="container">
-      <form class="form-signin" action="/user" method="post">
-        <h2 class="form-signin-heading">Please Signup</h2>
-        <label for="inputName" class="sr-only">Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          class="form-control"
-          placeholder="Name"
-          required=""
-        />
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="form-control"
-          placeholder="Email address"
-          required=""
-        />
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          class="form-control"
-          placeholder="Password"
-          required=""
-        />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-          SIGNUP
-        </button>
-        <br />
-        <p>Already have an account? <a href="/login">Login</a></p>
-      </form>
-    </div>
+    <section>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+      <span></span> <span></span> <span></span> <span></span> <span></span>
+
+      <div class="signin">
+        <form action="/user" method="post">
+          <div class="content">
+            <h2>Sign Up</h2>
+
+            <div class="form">
+              <div class="inputBox">
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-control"
+                  required=""
+                />
+                <i>Username</i>
+              </div>
+
+              <div class="inputBox">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  required=""
+                />
+                <i>Email</i>
+              </div>
+
+              <div class="inputBox">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  required=""
+                />
+                <i>Password</i>
+              </div>
+
+              <div class="inputBox">
+                <input type="submit" value="SUBMIT" />
+              </div>
+
+              <div class="links">
+                <p>Already have an account --> </p>
+                <a href="/login"> Login</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
   </body>
 </html>
